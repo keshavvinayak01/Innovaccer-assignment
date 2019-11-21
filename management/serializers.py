@@ -1,7 +1,7 @@
 from rest_framework import serializers as sz
 from management.views import Visitor, Host
 
-class CreateVisitor(sz.ModelSerializer):
+class CreateVisitorSerializer(sz.ModelSerializer):
     def create(self, validated_data):
         free_host = Host.objects.get(available = True)[0]
         visitor = Visitor.objects.create(
