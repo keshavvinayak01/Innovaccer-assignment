@@ -6,7 +6,7 @@ from management.serializers import CreateVisitorSerializer
 
 class CreateVisitorView(APIView):
     def post(self,request):
-        visitor = request.data.get('visitor')
+        visitor = request.data.get('data')
         if not visitor:
             return Response({'response' : 'error', 'message' : 'No data found'})
         serializer = CreateVisitorSerializer(data = visitor)

@@ -25,7 +25,7 @@ SECRET_KEY = '@vfcwtlm@!@pdmon-w_d-+@o47(0wzmrhbudrnfo08%49_s@u&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://localhost:3000']
+ALLOWED_HOSTS = ['127.0.0.1', 'http://localhost:3000']
 
 
 # Application definition
@@ -124,8 +124,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES' : (
-        'rest_framework.permissions.AllowAny'
-    )
+        'rest_framework.permissions.AllowAny',
+    ),
 }
 
 CORS_ORIGIN_WHITELITST = (
