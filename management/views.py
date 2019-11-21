@@ -5,8 +5,6 @@ from management.serializers import CreateVisitorSerializer
 # Create your views here.
 
 class CreateVisitorView(APIView):
-    permission_classes = (permissions.AllowAny, )
-
     def post(self,request):
         visitor = request.data.get('visitor')
         if not visitor:
