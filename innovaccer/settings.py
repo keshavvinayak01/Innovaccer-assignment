@@ -25,7 +25,7 @@ SECRET_KEY = '@vfcwtlm@!@pdmon-w_d-+@o47(0wzmrhbudrnfo08%49_s@u&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://localhost:3000']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
     'management'
 ]
 
@@ -119,3 +121,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES' : (
+        'rest_framework.permissions.AllowAny'
+    )
+}
+
+CORS_ORIGIN_WHITELITST = (
+    'http://localhost:3000'
+)
