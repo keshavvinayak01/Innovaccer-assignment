@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from management.serializers import CreateVisitor
+from management.serializers import CreateVisitorSerializer
 # Create your views here.
 
-class CreateUserView(APIView):
+class CreateVisitorView(APIView):
     permission_classes = (permissions.AllowAny, )
 
     def post(self,request):
         visitor = request.data.get('visitor')
         if not visitor:
             return Response({'response' : 'error', 'message' : 'No data found'})
-        serializer = CreateVisitor(data = visitor)
+        serializer = CreateVisitorSerializer(data = visitor)
         if serializer.is_valid():
             saved_user = serializer.save()
         else:
