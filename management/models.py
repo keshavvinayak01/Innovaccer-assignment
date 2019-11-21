@@ -7,11 +7,12 @@ class Host(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     phone = models.CharField(max_length = 12)
     ADDRESS_CHOICES = [
-        "Noida HQ", "<random_address1>",
-        "Bangalore" : "<random_address2>"
+        ("Noida HQ", "<random_address1>"),
+        ("Bangalore","<random_address2>")
     ]
     address = models.CharField(
         choices = ADDRESS_CHOICES,
+        max_length = 100,
         default = "Noida HQ"
     )
     available = models.BooleanField(default = True)
