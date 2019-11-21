@@ -38,4 +38,7 @@ def create_host(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender = User)
 def save_user_profile(sender, instance , **kwargs):
+    if not instance.email:
+        instance.email="example123@gmail.com"
+        instance.save()
     instance.host.save()
