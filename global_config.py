@@ -4,5 +4,5 @@ import io
 
 def get_global_config():
     config = configparser.ConfigParser()
-    config.read('global_config.ini')
+    config.read('config.ini')
     return config
