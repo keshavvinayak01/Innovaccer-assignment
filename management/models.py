@@ -6,6 +6,14 @@ from django.dispatch import receiver
 class Host(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     phone = models.CharField(max_length = 12)
+    ADDRESS_CHOICES = [
+        "Noida HQ", "<random_address1>",
+        "Bangalore" : "<random_address2>"
+    ]
+    address = models.CharField(
+        choices = ADDRESS_CHOICES,
+        default = "Noida HQ"
+    )
     available = models.BooleanField(default = True)
 
 class Visitor(models.Model):
@@ -13,7 +21,7 @@ class Visitor(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=12)
     check_in_time = models.DateTimeField(auto_now_add=True, blank = True)
-    check_out_time = models.DateTimeField()
+    check_out_time = models.TimeField()
     host = models.OneToOneField(Host, on_delete = models.CASCADE, related_name="host")
 
 @receiver(post_save, sender = User)
