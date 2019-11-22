@@ -25,7 +25,7 @@ class Visitor(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=13)
     check_in_time = models.DateTimeField(auto_now_add=True, blank = True)
-    check_out_time = models.TimeField()
+    check_out_time = models.DateTimeField()
     host = models.ForeignKey(Host, on_delete = models.CASCADE, related_name="visitors")
 
     def __str__(self):
@@ -39,6 +39,6 @@ def create_host(sender, instance, created, **kwargs):
 @receiver(post_save, sender = User)
 def save_user_profile(sender, instance , **kwargs):
     if not instance.email:
-        instance.email="example123@gmail.com"
+        instance.email="kvrox113@gmail.com"
         instance.save()
     instance.host.save()
