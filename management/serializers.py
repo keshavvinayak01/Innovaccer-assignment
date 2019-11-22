@@ -1,8 +1,8 @@
 from rest_framework import serializers as sz
 from management.models import Visitor, Host
 from django.db import transaction
-from django.core.mail import send_mail
-from django.conf import settings
+from management.tasks import send_email
+from datetime import datetime
 
 @transaction.atomic
 class CreateVisitorSerializer(sz.ModelSerializer):
@@ -16,11 +16,9 @@ class CreateVisitorSerializer(sz.ModelSerializer):
             host = free_host
         )
         visitor.save()
-        send_mail(
-            "This is a test",
-            "This is a test message for a test email 4 u",
-            settings.EMAIL_HOST_USER,
-            ['kvrox113@gmail.com']
+        send_email.apply_async(
+            args=[visitor, free_host, "Host"], 
+            eta = datetime.now()
         )
         return visitor
     class Meta:
