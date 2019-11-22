@@ -3,7 +3,7 @@ from management.models import Visitor, Host
 from django.db import transaction
 from management.tasks import send_email
 from datetime import datetime
-
+from django.core import serializers 
 @transaction.atomic
 class CreateVisitorSerializer(sz.ModelSerializer):
     def create(self, validated_data):
@@ -17,8 +17,20 @@ class CreateVisitorSerializer(sz.ModelSerializer):
         )
         visitor.save()
         send_email.apply_async(
-            args=[visitor, free_host, "Host"], 
+            args=[
+                serializers.serialize('json', [visitor]), 
+                serializers.serialize('json', [free_host]), 
+                "Host"
+            ], 
             eta = datetime.now()
+        )
+        send_email.apply_async(
+            args=[
+                serializers.serialize('json', [visitor]), 
+                serializers.serialize('json', [free_host]), 
+                "Visitor"
+            ], 
+            eta = visitor.check_out_time
         )
         return visitor
     class Meta:
