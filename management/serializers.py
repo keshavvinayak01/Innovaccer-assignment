@@ -3,7 +3,9 @@ from management.models import Visitor, Host
 from django.db import transaction
 from management.tasks import send_alert
 from datetime import datetime
+import pytz
 from django.core import serializers 
+tz = pytz.timezone('Asia/Kolkata')
 
 @transaction.atomic
 class CreateVisitorSerializer(sz.ModelSerializer):
@@ -23,7 +25,7 @@ class CreateVisitorSerializer(sz.ModelSerializer):
                 serializers.serialize('json', [free_host]), 
                 "Host"
             ], 
-            eta = datetime.now()
+            eta = datetime.now().astimezone(tz)
         )
         send_alert.apply_async(
             args=[
