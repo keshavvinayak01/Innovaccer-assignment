@@ -13,7 +13,7 @@ from twilio.rest import Client
 
 logger = get_task_logger(__name__)
 
-@task(name = "send_email")
+@task(name = "send_alert")
 def send_alert(visitor, host, recipient):
     client = Client(active_config['TWILIO']['ACCOUNT_SID'], active_config['TWILIO']['AUTH_TOKEN'])
     visitor = loads(visitor)[0]['fields']
