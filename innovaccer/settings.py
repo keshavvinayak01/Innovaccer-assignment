@@ -133,10 +133,18 @@ CORS_ORIGIN_WHITELITST = (
     'http://localhost:3000'
 )
 
-
+# Google SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = active_config['EMAIL_CLIENT']['EMAIL_ADDRESS']
 EMAIL_HOST_PASSWORD = active_config['EMAIL_CLIENT']['PASSWORD']
+
+# Celery
+BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "Asia/Kolkata"
