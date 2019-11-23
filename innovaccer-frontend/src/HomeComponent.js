@@ -46,8 +46,11 @@ class HomeComponent extends Component {
 			this.setState({error : "Full name must be greater than 5 characters"})
 		else if(!Number(this.state.contact)) 
 			this.setState({error : "Contact number must be a number!"})
-		else if(this.state.contact.length < 10) 
+		else if(this.state.contact.length != 10) 
 			this.setState({error : "Contact number must be exactly 10 characters long"})
+		else if(this.state.CheckOutHour <= (new Date()).getHours() && 
+		this.state.CheckOutMinute <= (new Date()).getMinutes())
+			this.setState({error : "Check out time must not be less than or equal to current time"})
 		else 
 			this.setState({error : ''})
 		if(this.state.error.length === 0) {
@@ -77,7 +80,8 @@ class HomeComponent extends Component {
 						<Form.Control name="email" value={this.state.email} 
 						onChange={this.handleValueChange} 
 						type="email" 
-						placeholder="Enter email" />
+						placeholder="Enter email"
+						required />
 						<Form.Text className="text-muted">
 						We'll never share your email with anyone else.
 						</Form.Text>
@@ -104,7 +108,6 @@ class HomeComponent extends Component {
 							<Form.Control name="CheckOutHour" 
 							onChange={this.handleValueChange} 
 							value={this.state.CheckOutHour} as="select">
-									<option>Hours</option>
 									{
 										[...Array(24 - hours).keys()].map((hour) => {
 											return <option key={hour}>{hours + hour}</option>
@@ -120,15 +123,20 @@ class HomeComponent extends Component {
 							value={this.state.CheckOutMinute} 
 							as="select">
 									{
-										[...Array(60 - minutes).keys()].map((minute) => {
+										[...Array(60).keys()].map((minute) => {
 											return <option key={minute}>{minutes + minute}</option>
 										})
 									}
 							</Form.Control>
 						</Form.Group>
 					</StyledFormRow>
-					<p className="error">{this.state.error}</p>
-					<Button variant="primary" type="submit">
+					{
+						this.state.error.length > 0 ?  
+						<p className="error">{this.state.error}</p>
+						:
+						""
+					}
+					<Button vari	ant="primary" type="submit">
 						Submit
 					</Button>
 				</StyledForm>
