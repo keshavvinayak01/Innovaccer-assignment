@@ -1,37 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import styled from 'styled-components'
-
+import { getHours, getMinutes } from 'date-fns';
 const StyledForm = styled(Form)`
 text-align : left!important;
+margin-top : 50px;
 `
 const Container = styled.div`
 text-align : center!important
 `
+
+// 'full_name',
+// 'email',
+// 'phone',
+// 'check_out_time',
+
 function HomeComponent() {
+	const [CheckOutHour, setCheckOutHour] = useState(String((new Date()).getHours()));
+	const [CheckOutMinute, setCheckOutMinute] = useState(String((new Date()).getMinutes()));
+	const handleHourChange = e => {
+		setCheckOutHour(e.target.value)
+	}
+
+	const handleMinuteChange = e => {
+		setCheckOutMinute(e.target.value)
+	}
+
+
 	return (
 			<Container className="container">
 				<StyledForm>
-					<Form.Group controlId="formBasicEmail">
-						<Form.Label>Email address</Form.Label>
-						<Form.Control type="email" placeholder="Enter email" />
-						<Form.Text className="text-muted">
-						We'll never share your email with anyone else.
-						</Form.Text>
+					<Form.Group controlId="formBasicText">
+						<Form.Label className="primary-text">Full name</Form.Label>
+						<Form.Control type="text" placeholder="Enter Full name here" />
 					</Form.Group>
 
-					<Form.Group controlId="formBasicPassword">
-						<Form.Label>Password</Form.Label>
-						<Form.Control type="password" placeholder="Password" />
+					<Form.Group controlId="formBasicEmail">
+						<Form.Label className="primary-text">Email Address</Form.Label>
+						<Form.Control type="email" placeholder="Enter email" />
+						<Form.Text className="text-muted">
+      			We'll never share your email with anyone else.
+    				</Form.Text>
 					</Form.Group>
-					<Form.Group controlId="formBasicCheckbox">
-						<Form.Check type="checkbox" label="Check me out" />
+
+					<Form.Group controlId="formBasicPhone">
+						<Form.Label className="primary-text">Phone Number</Form.Label>
+						<Form.Control type="text" placeholder="Phone Number" />
+						<Form.Text className="text-muted">
+      			Enter <b>without</b> Country Code(+91).
+    				</Form.Text>
 					</Form.Group>
+
+					<Form.Group controlId="formBasicDate">
+						<Form.Label className="primary-text">Check out time</Form.Label>
+						<div className="row">
+							<div className="col">
+								<Form.Control onChange={handleHourChange} type="text" value={CheckOutHour} placeholder="Check out Hour" />
+							</div>
+							<div className="col">
+							<Form.Control onChange={handleMinuteChange} type="text" value={CheckOutMinute} placeholder="Check out Minutes" />
+							</div>
+						</div>
+						<Form.Text className="text-muted">
+      			Enter in 24 hours format.
+    				</Form.Text>
+					</Form.Group>
+
 					<Button variant="primary" type="submit">
 						Submit
 					</Button>
 				</StyledForm>
+
 			</Container>
 	)
 }

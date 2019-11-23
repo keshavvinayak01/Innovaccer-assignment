@@ -20,3 +20,9 @@
 .App-link {
   color: #09d3ac;
 }
+
+.primary-text {
+  font-family: "Swis721", sans-serif!important;
+  color:#E31C79 !important;
+  font-weight: 600;
+}
