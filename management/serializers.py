@@ -1,7 +1,8 @@
 from rest_framework import serializers as sz
 from management.models import Visitor, Host
+
 from django.db import transaction
-from management.tasks import send_alert
+from management.tasks import send_alert, make_available
 from datetime import datetime
 import pytz
 from django.core import serializers 
@@ -19,6 +20,8 @@ class CreateVisitorSerializer(sz.ModelSerializer):
             host = free_host
         )
         visitor.save()
+        free_host.available = False
+        free_host.save()
         send_alert.apply_async(
             args=[
                 serializers.serialize('json', [visitor]), 
@@ -33,6 +36,10 @@ class CreateVisitorSerializer(sz.ModelSerializer):
                 serializers.serialize('json', [free_host]), 
                 "Visitor"
             ], 
+            eta = visitor.check_out_time
+        )
+        make_available.apply_async(
+            args=[free_host.pk], 
             eta = visitor.check_out_time
         )
         return visitor

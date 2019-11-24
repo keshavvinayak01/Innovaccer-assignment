@@ -2,8 +2,9 @@ from celery.decorators import task
 from celery.utils.log import get_task_logger
 from datetime import datetime, timedelta
 from django.core.mail import send_mail
+from management.models import Host
 from django.conf import settings
-from json import loads
+from json import loads, dumps
 from django.contrib.auth.models import User
 from global_config import get_global_config
 
@@ -13,12 +14,19 @@ from twilio.rest import Client
 
 logger = get_task_logger(__name__)
 
+@task(name = "make_available")
+def make_available(host_pk):
+    host = Host.objects.get(pk = host_pk)
+    host.available = True
+    host.save()
+
 @task(name = "send_alert")
 def send_alert(visitor, host, recipient):
     client = Client(active_config['TWILIO']['ACCOUNT_SID'], active_config['TWILIO']['AUTH_TOKEN'])
     visitor = loads(visitor)[0]['fields']
     host = loads(host)[0]['fields']
     host_user = User.objects.get(pk = host['user'])
+
     if recipient == "Host" :
         message = """
         You have a new visitor ! here are the details : 

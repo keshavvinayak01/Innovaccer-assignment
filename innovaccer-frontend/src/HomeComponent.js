@@ -64,12 +64,16 @@ class HomeComponent extends Component {
 			this.setState({error : "Check out time must not be less than or equal to current time"})
 		else {
 			this.setState({error : ''})
+			var datetime = new Date()
+			var date = datetime.getDate()
+			var month = datetime.getMonth()
+			var year = datetime.getFullYear() 			
 			Axios.post("http://127.0.0.1:8000/" + "apiv1/create-visitor/", {
                 "data": {
 					"full_name": this.state.fullName,
 					"email": this.state.email,
 					"phone": "+91" + this.state.contact,
-					"check_out_time": String(new Date().toISOString().slice(0, 10)) + ` ${this.state.CheckOutHour}:${this.state.CheckOutMinute}:00`
+					"check_out_time": `${year}-${month}-${date} ${this.state.CheckOutHour}:${this.state.CheckOutMinute}:00`
 				}})
             .then(response => {
 				if(response.data.response === "error") {
