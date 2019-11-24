@@ -66,7 +66,7 @@ class HomeComponent extends Component {
 			this.setState({error : ''})
 			var datetime = new Date()
 			var date = datetime.getDate()
-			var month = datetime.getMonth()
+			var month = datetime.getMonth() + 1
 			var year = datetime.getFullYear() 			
 			Axios.post("http://127.0.0.1:8000/" + "apiv1/create-visitor/", {
                 "data": {
