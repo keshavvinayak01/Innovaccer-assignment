@@ -38,7 +38,6 @@ npm install
 npm start
 ```
 
-```
 7. Try submitting the form, observe the output on the celery terminal, and your email address and phone numbers for messages.
 
 # Workflow : 
