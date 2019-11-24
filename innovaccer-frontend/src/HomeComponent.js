@@ -68,7 +68,7 @@ class HomeComponent extends Component {
                 "data": {
 					"full_name": this.state.fullName,
 					"email": this.state.email,
-					"phone": this.state.contact,
+					"phone": "+91" + this.state.contact,
 					"check_out_time": String(new Date().toISOString().slice(0, 10)) + ` ${this.state.CheckOutHour}:${this.state.CheckOutMinute}:00`
 				}})
             .then(response => {
