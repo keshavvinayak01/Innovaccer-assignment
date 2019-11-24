@@ -46,14 +46,26 @@ User.objects.create(
 ```
 6. Try submitting the form, observe the output on the celery terminal, and your email address and phone numbers for messages.
 
-# Examples : 
+# Workflow : 
+1. In the React client, submit the complete form.
 ![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/app.png)
+
+
+2. Observe the task received in the terminal along with the timings scheduled. 
 ![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/terminal.png)
+
+3. The Host should receive the mail in a moment.
 ![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/mail.png)
+
+4. The Host should receive the phone number in a while as well.
 ![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/phone.jpeg)
 
 # Things to note :
-For obvious reasons, I've excluded my keys and settings from config.ini file, add your twilio key, gmail account to use these features. Also, change file name to config_prod.ini afterwards.
+For obvious reasons, I've excluded my keys and settings from config.ini file, add your twilio key,gmail account to use these features. Also, change file name to config_prod.ini afterwards.
+
+# Approach used : 
+I First set out to create an endpoint which accepts submission of the visitor form, upon submission, the endpoint triggers two tasks, one to send the host information about the visitor ASAP, and one to send the Visitor information about the visit when the meet is over.
+To schedule the tasks, I used celery backed with redis store for asynchronous calls to my send_info method. I'm a big fan of integrating Django Rest Framework with React, as you would discover if you click [here](https://medium.com/@keshavvinayakjha)
 
 # Planned work:
 Because my exams are ongoing, I was not able to fully complete all the features I had planned, so I'll list them here : 
