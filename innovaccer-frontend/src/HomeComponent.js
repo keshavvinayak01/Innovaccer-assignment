@@ -60,12 +60,10 @@ class HomeComponent extends Component {
 			this.setState({error : "Contact number must be a number!"})
 		else if(this.state.contact.length != 10) 
 			this.setState({error : "Contact number must be exactly 10 characters long"})
-		else if(this.state.CheckOutHour <= (new Date()).getHours() && 
-		this.state.CheckOutMinute <= (new Date()).getMinutes())
+		else if(this.state.CheckOutHour <= (new Date()).getHours() && this.state.CheckOutMinute <= (new Date()).getMinutes())
 			this.setState({error : "Check out time must not be less than or equal to current time"})
-		else 
+		else {
 			this.setState({error : ''})
-		if(this.state.error.length === 0) {
 			Axios.post("http://127.0.0.1:8000/" + "apiv1/create-visitor/", {
                 "data": {
 					"full_name": this.state.fullName,
