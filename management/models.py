@@ -34,7 +34,7 @@ class Visitor(models.Model):
 @receiver(post_save, sender = User)
 def create_host(sender, instance, created, **kwargs):
     if created:
-        Host.objects.create(user = instance, phone = "+917678442691")
+        Host.objects.create(user = instance)
 
 @receiver(post_save, sender = User)
 def save_user_profile(sender, instance , **kwargs):

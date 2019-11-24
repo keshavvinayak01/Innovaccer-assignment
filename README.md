@@ -18,33 +18,28 @@ pip3 install -r requirements.txt
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
-3. Start the Django server
+3. Populate the database with mock data, also, alter the emails, names, phones of host to your liking. If you want a GUI, open localhost:8000/admin to manually add User/Host there itself.
+```
+python3 populate_db.py
+```
+4. Start the Django server
 ```
 python3 manage.py runserver
 ```
-4. Make sure you have celery and redis-cli installed, then run the celery worker(queue) at a second terminal
+5. Make sure you have celery and redis-cli installed, then run the celery worker(queue) at a second terminal
 ```
 celery worker -A innovaccer worker -l info
 ```
 
-5. Install the npm packages and start the react client at a third terminal
+6. Install the npm packages and start the react client at a third terminal
 ```
 cd innovaccer-frontend
 npm install 
 npm start
 ```
-6. Before starting submitting the form, make sure there exists Users, if not, try this at root directory:
-```shell
-python3 manage.py shell
-from django.contrib.auth.models import User
-User.objects.create(
-    username="host1", 
-    email="kvrox113@gmail.com", 
-    first_name = "Ramesh", 
-    last_name = "Kumar"
-)
+
 ```
-6. Try submitting the form, observe the output on the celery terminal, and your email address and phone numbers for messages.
+7. Try submitting the form, observe the output on the celery terminal, and your email address and phone numbers for messages.
 
 # Workflow : 
 1. In the React client, submit the complete form.
