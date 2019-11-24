@@ -72,7 +72,6 @@ class HomeComponent extends Component {
 					"check_out_time": String(new Date().toISOString().slice(0, 10)) + ` ${this.state.CheckOutHour}:${this.state.CheckOutMinute}:00`
 				}})
             .then(response => {
-				console.log(response)
 				if(response.data.response === "error") {
 					alert(response.data.message + "\n\nPlease Try again")
 				}
