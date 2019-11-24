@@ -63,6 +63,6 @@ To schedule the tasks, I used celery backed with redis store for asynchronous ca
 
 # Planned work:
 Because my exams are ongoing, I was not able to fully complete all the features I had planned, so I'll list them here : 
-1. Loading Screen for React after submission, and better alerts.
-2. Making Host unavailable after form submission and making them available after check out of current visitor.
-3. Letting user know of closest time when a host will be free.
+1. ✘ Loading Screen for React after submission, and better alerts.
+2. ✅ Making Host unavailable after form submission and making them available after check out of current visitor.
+3. ✅ Letting user know of closest time when a host will be free.
