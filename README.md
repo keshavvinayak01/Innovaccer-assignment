@@ -59,10 +59,10 @@ For obvious reasons, I've excluded my keys and settings from config.ini file, ad
 
 # Approach used : 
 I First set out to create an endpoint which accepts submission of the visitor form, upon submission, the endpoint triggers two tasks, one to send the host information about the visitor ASAP, and one to send the Visitor information about the visit when the meet is over.
-To schedule the tasks, I used celery backed with redis store for asynchronous calls to my send_alert method. I used the trial version of twilio which allowed me to send emails to trusted numbers which I have to configure manually. This is easily handled to scale by upgrading twilio. For simplicity, I used my personal mail with Google SMTP for mail purposes. I initially thought of using Amazon SES with boto3 for the simplicity it offers, but due to technical issues with my amazon account, I was unable to avail that option, so stuck with the former. I'm a big fan of integrating Django Rest Framework with React, as you would discover if you click [here](https://medium.com/@keshavvinayakjha)
+To schedule the tasks, I used celery backed with redis store for asynchronous calls to my send_alert method. I also made the host unavailable and available as per his/her meet with a visitor. I used the trial version of twilio which allowed me to send emails to trusted numbers which I have to configure manually. This is easily handled to scale by upgrading twilio. For simplicity, I used my personal mail with Google SMTP for mail purposes. I initially thought of using Amazon SES with boto3 for the simplicity it offers, but due to technical issues with my amazon account, I was unable to avail that option, so stuck with the former. I'm a big fan of integrating Django Rest Framework with React, as you would discover if you click [here](https://medium.com/@keshavvinayakjha)
 
 # Planned work:
 Because my exams are ongoing, I was not able to fully complete all the features I had planned, so I'll list them here : 
 1. ✘ Loading Screen for React after submission, and better alerts.
 2. ✅ Making Host unavailable after form submission and making them available after check out of current visitor.
-3. ✅ Letting user know of closest time when a host will be free.
+3. ✘ Letting user know of closest time when a host will be free.
