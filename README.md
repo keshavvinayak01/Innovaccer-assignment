@@ -22,12 +22,12 @@ python3 manage.py migrate
 ```
 python3 manage.py runserver
 ```
-4. Make sure you have celery and redis-cli installed, then run the celery worker(queue)
+4. Make sure you have celery and redis-cli installed, then run the celery worker(queue) at a second terminal
 ```
 celery worker -A innovaccer worker -l info
 ```
 
-5. Install the npm packages and start the react client
+5. Install the npm packages and start the react client at a third terminal
 ```
 cd innovaccer-frontend
 npm install 
@@ -35,7 +35,7 @@ npm start
 ```
 6. Before starting submitting the form, make sure there exists Users, if not, try this at root directory:
 ```shell
-python3 manage.py 
+python3 manage.py shell
 from django.contrib.auth.models import User
 User.objects.create(
     username="host1", 
