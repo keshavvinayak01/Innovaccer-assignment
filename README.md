@@ -50,7 +50,7 @@ User.objects.create(
 ![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/app.png)
 ![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/terminal.png)
 ![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/mail.png)
-![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/phone.png)
+![alt_text](https://github.com/keshavvinayak01/innovaccer-assignment/blob/master/media/phone.jpeg)
 
 # Things to note :
 For obvious reasons, I've excluded my keys and settings from config.ini file, add your twilio key, gmail account to use these features. Also, change file name to config_prod.ini afterwards.
