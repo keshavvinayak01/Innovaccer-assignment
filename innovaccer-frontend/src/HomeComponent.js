@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {Col} from 'react-bootstrap'
 import styled from 'styled-components'
+import Axios from 'axios'
+
 const StyledForm = styled(Form)`
 	text-align : left!important;
 	margin-top : 50px;
@@ -39,6 +41,16 @@ class HomeComponent extends Component {
 			[e.target.name] : e.target.value
 		})
 	}
+	resetForm = () => {
+		this.setState({
+			CheckOutHour : (new Date()).getHours(),
+			CheckOutMinute : (new Date()).getMinutes(),
+			fullName : '',
+			email : '',
+			contact : '',
+			error : ''
+		})
+	}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
@@ -54,13 +66,30 @@ class HomeComponent extends Component {
 		else 
 			this.setState({error : ''})
 		if(this.state.error.length === 0) {
-			return;
-			// Make the API CALL HERE
+			Axios.post("http://127.0.0.1:8000/" + "apiv1/create-visitor/", {
+                "data": {
+					"full_name": this.state.fullName,
+					"email": this.state.email,
+					"phone": this.state.contact,
+					"check_out_time": String(new Date().toISOString().slice(0, 10)) + ` ${this.state.CheckOutHour}:${this.state.CheckOutMinute}:00`
+				}})
+            .then(response => {
+				console.log(response)
+				if(response.data.response === "error") {
+					alert(response.data.message + "\n\nPlease Try again")
+				}
+				else {
+					alert("Thanks for filling this form!")
+					this.resetForm()
+				}				
+            })
+            .catch(error => {
+                console.log(error)
+            })
 		}
 	}
 	render() {
 		const hours = (new Date()).getHours();
-		const minutes = (new Date()).getHours();
 		return (
 			<Container className="container">
 				<StyledForm onSubmit={this.handleSubmit}>
@@ -124,7 +153,7 @@ class HomeComponent extends Component {
 							as="select">
 									{
 										[...Array(60).keys()].map((minute) => {
-											return <option key={minute}>{minutes + minute}</option>
+											return <option key={minute}>{minute}</option>
 										})
 									}
 							</Form.Control>
@@ -136,7 +165,7 @@ class HomeComponent extends Component {
 						:
 						""
 					}
-					<Button vari	ant="primary" type="submit">
+					<Button variant="primary" type="submit">
 						Submit
 					</Button>
 				</StyledForm>

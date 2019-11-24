@@ -26,8 +26,6 @@ SECRET_KEY = '@vfcwtlm@!@pdmon-w_d-+@o47(0wzmrhbudrnfo08%49_s@u&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'http://localhost:3000']
-
 
 # Application definition
 
@@ -44,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,9 +128,12 @@ REST_FRAMEWORK = {
     ),
 }
 
-CORS_ORIGIN_WHITELITST = (
-    'http://localhost:3000'
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
 )
+
+CORS_ALLOW_CREDENTIALS = True
+ALLOWED_HOSTS = ['*']
 
 # Google SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
